@@ -1,0 +1,29 @@
+@import 'navbar.scss';
+@import "sidebar.scss";
+
+.noz-content {
+    .uk-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (min-width: $breakpoint-medium) {
+    .noz-content {
+        padding-left: 260px;
+        .uk-container {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+}
+
+
+@media (min-width: $breakpoint-xlarge) {
+    .noz-content {
+        .uk-container {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+body.login {
+    background-image: url('/assets/img/bgd.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    .wrapper {
+        color: #fff;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);
+        .forms {
+            width: 320px;
+            height: 500px;
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            img {
+                width: 180px;
+            }
+            label {
+                color: #fff;
+            }
+            .input-transparent {
+                span {
+                    color: #fff;
+                }
+                input, select {
+                    color: #fff;
+                    background-color: rgba(255,255,255,0.3);
+                }
+                input::placeholder {
+                    font-weight: 200;
+                    color: #ddd
+                }
+            }
+        }
+    }
+}
+
+body.login.full-form {
+    min-height: 100vh;
+    background-image: url('/assets/img/launch_bgd.jpg');
+    .wrapper {
+        background-color: rgba(0,0,0,0.5);
+        .forms {
+            @media (min-width: $breakpoint-medium) {
+                width: 950px;
+            }
+            height: auto;
+            img {
+                width: 130px;
+            }
+            .input-transparent {
+                input::placeholder {
+                    font-weight: 400;
+                    color: #ddd
+                }
+            }
+        }
+    }
+}

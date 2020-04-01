@@ -1,0 +1,16 @@
+.nz-sidebar-left {
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 260px !important;
+    padding: 100px 40px 60px 40px;
+    border-right: 1px #e5e5e5 solid;
+    overflow: auto;
+    .uk-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
