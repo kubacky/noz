@@ -46,6 +46,7 @@ CREATE TABLE `offer` (
   `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `url` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `launch_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `flag` tinyint unsigned NOT NULL DEFAULT '1',

@@ -3,6 +3,7 @@
 /* @var $users array */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = $title; ?>
 
@@ -25,9 +26,6 @@ $this->title = $title; ?>
             </td>
             <td>
                 <?= Html::encode($user->email); ?>
-            </td>
-            <td>
-
             </td>
             <td class="uk-align-right">
                 <a href="<?= Url::to(['dashboard/user/edit', 'id'=>$user->id]) ?>" class="uk-icon-link uk-margin-small-right" uk-icon="file-edit"></a>

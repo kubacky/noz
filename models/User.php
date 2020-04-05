@@ -51,7 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function findAll($status = self::USER_ACTIVE)
     {
-        return parent::findAll(['flag', $status]);
+        return parent::findAll(['flag' => $status]);
     }
 
     public static function findIdentity($id)

@@ -24,7 +24,6 @@ class OfferForm extends Model
                 'title',
                 'url',
                 'launch_date',
-                'end_date',
                 'branches'
             ], 'required'],
             ['file_id', 'integer'],

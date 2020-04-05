@@ -19,7 +19,7 @@ class OfferController extends AppController
     {
         $offers = Offer::findAll($status);
 
-        if(empty($offer)) {
+        if(empty($offers)) {
             Yii::$app->session->setFlash('no_ads', 'It seems that no advertising has been added yet');
             return $this->redirect(['/dashboard/offer/create']);
         }
@@ -74,6 +74,15 @@ class OfferController extends AppController
             'image' => $image,
             'title' => 'Edit offer: ' . $offer->title
         ]);
+    }
+
+    public function actionAccept($id) {
+        $offer = Offer::findOne($id);
+
+        $offer->flag = Offer::OFFER_ACTIVE;
+        $offer->save();
+
+        return $this->redirect(['/dashboard/offer/index']);
     }
 
     public function actionDelete($id)
