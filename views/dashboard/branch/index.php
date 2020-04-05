@@ -21,7 +21,7 @@ $this->title = $title;
     <?php foreach ($branches as $branch): ?>
     <tr>
         <td>
-            <?= $branch->name; ?>
+            <?= Html::encode($branch->name); ?>
         </td>
         <td>
             <?= $branch->code; ?>

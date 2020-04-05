@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+$user = Yii::$app->user->getIdentity();
 ?>
 <header class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
@@ -14,12 +16,15 @@ use yii\helpers\Url;
                 <a href="#" uk-icon="icon: user"></a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li class="uk-nav-header">Artur Kubacki</li>
-                        <li>
-                            <a href="<?= Url::to(['user/profile']); ?>">Profile</a>
+                        <li class="uk-nav-header">
+                            <?= Html::encode($user->first_name); ?>
+                            <?= Html::encode($user->last_name); ?>
                         </li>
                         <li>
-                            <a href="<?= Url::to(['user/logout']); ?>">Logout</a>
+                            <a href="<?= Url::to(['dashboard/user/profile']); ?>">Profile</a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::to(['/logout']); ?>">Logout</a>
                         </li>
                     </ul>
                 </div>

@@ -22,7 +22,7 @@ use yii\helpers\Url;
     <?php foreach ($offers as $offer): ?>
         <tr>
             <td>
-                <?= $offer->title; ?>
+                <?= Html::encode($offer->title); ?>
             </td>
             <td class="uk-align-right">
                 <a href="<?= Url::to(['dashboard/offer/edit', 'id'=>$offer->id]) ?>" class="uk-icon-link uk-margin-small-right" uk-icon="file-edit"></a>

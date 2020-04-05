@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\Menu;
 use app\models\User;
+
 ?>
 <nav id="offcanvas-slide" class="nz-sidebar-left uk-visible@m">
     <?=
@@ -67,16 +68,12 @@ use app\models\User;
                         'label' => 'View all',
                         'visible' => User::isAdmin(),
                         'url' => ['dashboard/user/index']
-                    ]
-                ],
-                'items' => [
+                    ],
                     [
                         'label' => 'Create user',
                         'visible' => User::isAdmin(),
                         'url' => ['dashboard/user/create']
-                    ]
-                ],
-                'items' => [
+                    ],
                     [
                         'label' => 'Edit your profile',
                         'url' => ['dashboard/user/prifle']

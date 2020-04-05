@@ -19,7 +19,8 @@ class Offer extends AppModel
                 'file_id',
                 'title',
                 'url',
-                'launch_date'
+                'launch_date',
+                'end_date'
             ], 'required'],
             ['file_id', 'integer', 'min' => 1],
             [['title', 'url'], 'string', 'max' => 45],
@@ -35,15 +36,6 @@ class Offer extends AppModel
 
     public static function findOne($id)
     {
-        return parent::findOne(['id' => $id])
-            ->select([
-                'offer.title',
-                'offer.description',
-                'offer.url',
-                'offer.launch_date',
-                'file.filename',
-                'file.dirname'
-            ])
-            ->where('file.id = offer.file_id');
+        return parent::findOne(['id' => $id]);
     }
 }

@@ -3,6 +3,7 @@
 
 namespace app\models;
 
+use yii\helpers\ArrayHelper;
 
 class Branch extends AppModel
 {
@@ -24,6 +25,10 @@ class Branch extends AppModel
     public static function findAll($status = self::BRANCH_ACTIVE)
     {
         return parent::findAll(['flag' => $status]);
+    }
+
+    public static function getMappedArrayOfBranches() {
+        return ArrayHelper::map(self::findAll(), 'id', 'name');
     }
 
     public static function deleteOne($id)

@@ -4,13 +4,13 @@ namespace app\controllers\dashboard;
 
 use app\controllers\AppController;
 use app\models\Branch;
+use app\models\File;
 use app\models\forms\BranchOffer;
 use app\models\forms\OfferForm;
 use app\models\forms\UploadForm;
 use app\models\Offer;
 use app\models\User;
 use Yii;
-use yii\helpers\ArrayHelper;
 
 class OfferController extends AppController
 {
@@ -18,6 +18,11 @@ class OfferController extends AppController
     public function actionIndex($status = Offer::OFFER_ACTIVE)
     {
         $offers = Offer::findAll($status);
+
+        if(empty($offer)) {
+            Yii::$app->session->setFlash('no_ads', 'It seems that no advertising has been added yet');
+            return $this->redirect(['/dashboard/offer/create']);
+        }
 
         return $this->render('index', [
             'offers' => $offers,
@@ -30,42 +35,46 @@ class OfferController extends AppController
         $model = new OfferForm();
         $upload = new UploadForm();
 
-        $branches = ArrayHelper::map(Branch::findAll(), 'id', 'name');
+        $branches = Branch::getMappedArrayOfBranches();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             return $this->_createOffer($model);
         }
 
+        $flash_title = Yii::$app->session->getFlash('no_ads');
+        $title =  $flash_title ? $flash_title : 'Create new offer';
+
         return $this->render('create', [
             'model' => $model,
             'upload' => $upload,
             'branches' => $branches,
-            'title' => 'Create new offer'
+            'title' => $title
         ]);
     }
 
-    public function actionEdit($offer_id) {
-        $offer = Offer::findOne($offer_id);
+    public function actionEdit($id)
+    {
+        $offer = Offer::findOne($id);
         $model = new OfferForm();
         $upload = new UploadForm();
 
         $model->title = $offer->title;
         $model->url = $offer->url;
-        $model->description = $offer->descritpion;
+        $model->description = $offer->description;
+        $model->branches = BranchOffer::getReducedArrayOfBranches($id);
         $model->launch_date = date('Y-m-d', strtotime($offer->launch_date));
 
-        $offer_branches = BranchOffer::findBranchesOfOffer();
-        $model->branches = ArrayHelper::map($offer_branches, 'id');
-        $branches = Branch::findAll();
+        $image = File::findOne($offer->file_id);
+        $branches = Branch::getMappedArrayOfBranches();
 
         return $this->render('create', [
             'model' => $model,
             'upload' => $upload,
             'branches' => $branches,
+            'image' => $image,
             'title' => 'Edit offer: ' . $offer->title
         ]);
     }
-
 
     public function actionDelete($id)
     {
@@ -76,8 +85,9 @@ class OfferController extends AppController
         }
     }
 
-    private function _createOffer($model) {
-        $offer_id = $model->save();
+    private function _createOffer($model)
+    {
+        $offer_id = $model->save($this->_config);
 
         foreach ($model->branches as $branch_id) {
             $branch_offer = new BranchOffer();
@@ -85,7 +95,7 @@ class OfferController extends AppController
             $branch_offer->offer_id = $offer_id;
             $branch_offer->branch_id = $branch_id;
 
-            $branch_offer->save();
+            $branch_offer->save($this->_config);
         }
 
         return $this->redirect(['/dashboard/offer']);

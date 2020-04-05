@@ -20,11 +20,21 @@ class BranchOffer extends ActiveRecord
     }
 
     public static function findBranchOffers($branch_id) {
-        return self::findAll(['branch_id', $branch_id]);
+        return self::find(['branch_id', $branch_id]);
+    }
+
+    public static function getReducedArrayOfBranches($offer_id) {
+        $branches = self::findBranchesOfOffer($offer_id);
+        $reduced = [];
+
+        foreach ($branches as $branch) {
+            $reduced[] = $branch->branch_id . '';
+        }
+        return $reduced;
     }
 
     public static function findBranchesOfOffer($offer_id) {
-        return self::findAll(['offer_id', $offer_id]);
+        return self::find(['offer_id', $offer_id])->all();
     }
 
     public static function deleteBranchOffers($branch_id) {

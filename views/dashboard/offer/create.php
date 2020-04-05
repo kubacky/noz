@@ -1,8 +1,7 @@
 <?php
-
+// todo: <edit> make the assignment of branches to the model
 /* @var $model app\models\forms\OfferForm */
 /* @var $upload app\models\forms\UploadForm */
-
 /* @var $title string */
 
 /* @var $branches array */
@@ -82,6 +81,18 @@ $this->title = $title;
                 'enctype' => 'multipart/form-data',
                 'class' => 'dropzone'
             ]]) ?>
+        <?php if (isset($image)): ?>
+            <div class="dz-preview dz-file-preview">
+                <div class="dz-details">
+                    <div class="dz-filename"><span data-dz-name></span></div>
+                    <div class="dz-size" data-dz-size></div>
+                    <img src="<?= "/assets/img/upload/{$image->dirname}/{$image->filename}"; ?>" data-dz-thumbnail/>
+                </div>
+                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                <div class="dz-error-mark"><span>✘</span></div>
+                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+            </div>
+        <?php endif; ?>
         <div class="fallback">
             <?= $form->field($upload, 'imageFile')->fileInput() ?>
         </div>
