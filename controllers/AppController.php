@@ -16,35 +16,36 @@ class AppController extends Controller
         parent::init();
         $this->_config = Setting::findAll(true);
 
-        if(empty($this->_config)) {
+        if (empty($this->_config)) {
             Yii::$app->user->logout();
             return $this->redirect('/launch');
-        }
-        else {
-            $this->_redirectGuest();
+        } else {
+            return $this->_redirectGuest();
         }
     }
 
     public function actionError()
     {
-        return self::render('error');
+        return $this->render('error');
     }
 
-    public function actionLogout() {
+    public function actionLogout()
+    {
         Yii::$app->user->logout();
-        return $this->goHome();
+        return $this->redirect('/login');
     }
 
-    protected function requiresAdmin()
+    protected function adminRequired()
     {
         if (!User::isAdmin()) {
             return $this->goHome();
         }
     }
 
-    private function _redirectGuest() {
+    private function _redirectGuest()
+    {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect('/login');
+            return $this->redirect(['/login']);
         }
     }
 }

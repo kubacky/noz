@@ -14,10 +14,9 @@ use Yii;
 
 class OfferController extends AppController
 {
-
     public function actionIndex($status = Offer::OFFER_ACTIVE)
     {
-        $offers = Offer::findAll($status);
+        $offers = Offer::findAllActive();
 
         if(empty($offers)) {
             Yii::$app->session->setFlash('no_ads', 'It seems that no advertising has been added yet');
@@ -87,7 +86,7 @@ class OfferController extends AppController
 
     public function actionDelete($id)
     {
-        $this->requiresAdmin();
+        $this->adminRequired();
 
         if (Branch::deleteOne($id)) {
             return $this->goBack();

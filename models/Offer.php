@@ -34,6 +34,12 @@ class Offer extends AppModel
         return parent::findAll(['flag' => $status]);
     }
 
+    public static function findAllActive() {
+        return parent::find()
+            ->where('flag != ' . self::OFFER_INACTIVE)
+            ->all();
+    }
+
     public static function findOne($id)
     {
         return parent::findOne(['id' => $id]);

@@ -55,7 +55,7 @@ use app\models\User;
                 'items' => [
 
                     [
-                        'label' => 'View all users',
+                        'label' => 'Configuration',
                         'url' => ['dashboard/setting/index']
                     ]
                 ]
@@ -76,7 +76,7 @@ use app\models\User;
                     ],
                     [
                         'label' => 'Edit your profile',
-                        'url' => ['dashboard/user/prifle']
+                        'url' => ['dashboard/user/profile']
                     ]
                 ]
             ],

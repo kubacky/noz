@@ -42,7 +42,7 @@ $this->title = $title;
                         <span class="uk-countdown-number uk-countdown-seconds uk-text-small"></span>
                     </div>
                 <?php else: ?>
-                <span class="uk-text-small">Offer completed</span>
+                    <span class="uk-text-small">Offer completed</span>
                 <?php endif; ?>
             </td>
             <td class="uk-align-right">

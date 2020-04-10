@@ -54,7 +54,7 @@ class BranchController extends AppController
 
     public function actionDelete($id)
     {
-        $this->requiresAdmin();
+        $this->adminRequired();
         if (Branch::deleteOne($id)) {
             return $this->redirect(['/dashboard/branch']);
         }
