@@ -45,7 +45,7 @@ class AppController extends Controller
     private function _redirectGuest()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect(['/login']);
+            return $this->redirect('/login');
         }
     }
 }
